@@ -21,7 +21,7 @@ public class MatchmakingService {
 	 */
 	public MatchmakingUser addUser(String chatId, String userId, String username) {
 		String gameId = null;
-		MatchmakingUser user = repository.findMatchmakingUserByUserId(userId);
+		MatchmakingUser user = repository.findFirstMatchmakingUserByUserId(userId);
 		if (user != null) return null;
 		boolean isGlobal = !chatId.startsWith("-");
 		if (isGlobal) {
@@ -29,7 +29,7 @@ public class MatchmakingService {
 			if (games.size() == 0) gameId = "1";
 			else {
 				for (String game : games) {
-					if (repository.getGameUsersCountByGameId(game) < MAX_USERS) {
+					if (repository.countByGameId(game) < MAX_USERS) {
 						gameId = game;
 						break;
 					}
@@ -45,11 +45,11 @@ public class MatchmakingService {
 				}
 			}
 		} else {
-			if (repository.getGameUsersCountByGameId(chatId) < MAX_USERS) {
+			if (repository.countByGameId(chatId) < MAX_USERS) {
 				gameId = chatId;
 			} else {
 				int i = 1;
-				while (repository.getGameUsersCountByGameId(chatId + i) == MAX_USERS) i++;
+				while (repository.countByGameId(chatId + i) == MAX_USERS) i++;
 				gameId = chatId + i;
 			}
 		}
@@ -59,7 +59,7 @@ public class MatchmakingService {
 	}
 	
 	public MatchmakingUser getUserById(String userId) {
-		return repository.findMatchmakingUserByUserId(userId);
+		return repository.findFirstMatchmakingUserByUserId(userId);
 	}
 	
 	public List<MatchmakingUser> getUsersByGameId(String gameId) {

@@ -40,10 +40,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -56,25 +52,8 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-reactivestreams</artifactId>
-            <version>5.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc11-production</artifactId>
-            <version>23.4.0.24.05</version>
-            <type>pom</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.oracle.database.ha</groupId>
-                    <artifactId>simplefan</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.oracle.database.ha</groupId>
-                    <artifactId>ons</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>et.telebof</groupId>
@@ -83,7 +62,6 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

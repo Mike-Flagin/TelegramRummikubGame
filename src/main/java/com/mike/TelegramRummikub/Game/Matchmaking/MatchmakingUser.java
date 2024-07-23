@@ -2,21 +2,19 @@ package com.mike.TelegramRummikub.Game.Matchmaking;
 
 
 import com.mike.TelegramRummikub.TelegramRummikubApplication;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-@Entity
-@Table(name = "Matchmaking")
+@Document(collection = "matchmaking")
 public class MatchmakingUser {
 	@Id
-	@Column(name = "USERID")
 	private String userId;
-	@Column(name = "GAMEID")
 	private String gameId;
-	@Column(name = "USERNAME")
 	private String username;
 	
 	@Transient
