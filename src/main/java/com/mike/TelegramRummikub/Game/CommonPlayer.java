@@ -22,8 +22,7 @@ public abstract class CommonPlayer {
 		String filename = tempDir + userId + ".jpg";
 		try {
 			if (new File(filename).createNewFile()) {
-				FileOutputStream outputStream = null;
-				outputStream = new FileOutputStream(filename);
+				FileOutputStream outputStream = new FileOutputStream(filename);
 				outputStream.write(image, 0, image.length);
 				outputStream.close();
 			}

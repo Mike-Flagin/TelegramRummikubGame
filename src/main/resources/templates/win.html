@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/win.css" th:href="@{/css/win.css}"/>
+    <title th:text="#{gameover.header.text}"></title>
+</head>
+<body>
+<div class="container">
+    <div class="gameover-header" th:text="#{gameover.header.text}"></div>
+    <table id="user-table">
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td class="user-item">
+                <img th:src="@{|images| + ${user.playerData().image()}}">
+                <span th:text="${user.playerData().username()}">Юзер 1</span>
+            </td>
+            <td class="user-score">
+                <span th:text="${user.score()}">0</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

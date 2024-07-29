@@ -52,8 +52,8 @@ public class TelegramBot {
 	
 	public byte[] getUserImage(String userId) {
 		UserProfilePhotos photos = bot.context.getUserProfilePhotos(Long.parseLong(userId)).exec();
-		if (photos.photos.size() > 0) {
-			String fileId = photos.photos.get(0).get(0).file_id;
+		if (!photos.photos.isEmpty()) {
+			String fileId = photos.photos.getFirst().getFirst().file_id;
 			String filePath = bot.context.getFile(fileId).exec().file_path;
 			return bot.context.downloadFile(filePath);
 		}

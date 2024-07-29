@@ -26,7 +26,7 @@ public class Player extends CommonPlayer {
 		return userId;
 	}
 	
-	public void setUserId(String playerId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	

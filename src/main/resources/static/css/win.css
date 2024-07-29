@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("../img/register_bg.png");
+    background-size:cover;
+    color:white
+}
+.container {
+    text-align: center;
+}
+.gameover-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 30vw
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+td {
+    padding: 10px;
+    font-size: x-large;
+}
+.user-item {
+    display: flex;
+    align-items: center;
+}
+.user-item img {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    margin-right: 10px;
+}
+
+#user-table tr:nth-child(1) {
+    color: #ffd700;
+}
+#user-table tr:nth-child(2) {
+    color: #c0c0c0;
+}
+#user-table tr:nth-child(3) {
+    color: #e07f1f ;
+}

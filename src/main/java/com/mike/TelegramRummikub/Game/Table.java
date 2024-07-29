@@ -100,10 +100,10 @@ public class Table {
 		}
 		
 		//check thirteen blocks
-		for (int i = 0; i < thirteenBlocks.length; i++) {
+		for (Tile[] thirteenBlock : thirteenBlocks) {
 			int rowTilesCounter = 0;
-			for (int j = 0; j < thirteenBlocks[i].length; j++) {
-				if (thirteenBlocks[i][j] == null) {
+			for (Tile tile : thirteenBlock) {
+				if (tile == null) {
 					if (rowTilesCounter == 0) continue;
 					if (rowTilesCounter < 3) {
 						return false;
