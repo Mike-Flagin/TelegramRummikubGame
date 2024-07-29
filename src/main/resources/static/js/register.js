@@ -16,8 +16,7 @@ function connect() {
 }
 
 function updatePage(update) {
-    if((typeof update) == "string") startGame(update);
-    else if (update.add) addUser(update.user);
+    if (update.add) addUser(update.user);
     else removeUser(update.user);
 }
 
@@ -56,7 +55,7 @@ function start() {
 }
 
 function startGame(){
-    let url = window.location.origin + "/game/" + gameId + "?userId=" + userId;
+    let url = window.location.origin + "/game?gameId=" + gameId + "&userId=" + userId;
     window.location.replace(url);
 }
 

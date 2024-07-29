@@ -58,7 +58,7 @@ public class RegistrationController {
 	                           Model model) {
 		List<MatchmakingUser> registeredUsers = matchmakingService.getUsersByGameId(gameId);
 		model.addAttribute("users", registeredUsers);
-		if (userId.equals(registeredUsers.get(0).getUserId())) model.addAttribute("mainUser", true);
+		if (userId.equals(registeredUsers.getFirst().getUserId())) model.addAttribute("mainUser", true);
 		return "registration";
 	}
 	
@@ -72,6 +72,9 @@ public class RegistrationController {
 	
 	@MessageMapping("/registration/start")
 	public void gameStart(@Payload String gameId) {
+		List<MatchmakingUser> registeredUsers = matchmakingService.getUsersByGameId(gameId);
+		if (registeredUsers.size() < 2) return;
+		matchmakingService.createGame(gameId);
 		messagingTemplate.convertAndSend("/registration/start/%s".formatted(gameId), "");
 	}
 	
@@ -91,7 +94,7 @@ public class RegistrationController {
 	 * @param add  if true - user added, else - removed
 	 * @param user
 	 */
-	private record User(boolean add, MatchmakingUser user) {}
+	public record User(boolean add, MatchmakingUser user) {}
 }
 //TODO: image for users without image, fix when mainUser leaves button must be added to another user,
 // leave when page is closed

@@ -1,32 +1,34 @@
 package com.mike.TelegramRummikub.Game.Matchmaking;
 
 
-import com.mike.TelegramRummikub.TelegramRummikubApplication;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
+import com.mike.TelegramRummikub.Game.CommonPlayer;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.Date;
 
 @Document(collection = "matchmaking")
-public class MatchmakingUser {
-	@Id
-	private String userId;
+public class MatchmakingUser extends CommonPlayer {
 	private String gameId;
 	private String username;
+	@Indexed(name = "ttl_index", expireAfterSeconds = 14400)//4 hours
+	private Date createdAt;
 	
-	@Transient
-	private final String tempDir = "/tmp/";
-	
-	public MatchmakingUser(String gameId, String userId, String username) {
+	public MatchmakingUser(String gameId, String userId, String username, Date createdAt) {
 		this.gameId = gameId;
+		this.createdAt = createdAt;
 		this.userId = userId;
 		this.username = username;
 	}
 	
 	public MatchmakingUser() {
+	}
+	
+	public MatchmakingUser(String gameId, String userId, String username) {
+		this.gameId = gameId;
+		this.userId = userId;
+		this.username = username;
+		createdAt = new Date();
 	}
 	
 	public String getGameId() {
@@ -45,34 +47,19 @@ public class MatchmakingUser {
 		this.userId = userId;
 	}
 	
-	public String getImage() throws IOException {
-		byte[] image = TelegramRummikubApplication.getTelegramBot().getUserImage(userId);
-		if(image == null){
-			return null;
-		}
-		String filename = tempDir + userId + ".jpg";
-		new File(filename).createNewFile();
-		FileOutputStream outputStream = null;
-		try {
-			outputStream = new FileOutputStream(filename);
-			outputStream.write(image, 0, image.length);
-			outputStream.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return filename;
-	}
-	
 	public String getUsername() {
-		return username.replace('%', ' ');
+		return username;
 	}
 	
 	public void setUsername(String username) {
 		this.username = username;
 	}
 	
-	public void deleteImg() {
-		File f = new File(tempDir + userId + ".jpg");
-		if(f.exists()) f.delete();
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }

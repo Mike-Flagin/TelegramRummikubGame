@@ -8,8 +8,11 @@ import et.telebof.types.UserProfilePhotos;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Component
 public class TelegramBot {
@@ -27,9 +30,12 @@ public class TelegramBot {
 	private void onCallbackQuery(BotContext context, CallbackQuery query) {
 		String chatId = query.chat_instance;
 		String userId = String.valueOf(query.from.id);
-		String username = query.from.first_name + "%" + (query.from.last_name == null ? "" : query.from.last_name);
+		String username = URLEncoder.encode(
+				query.from.first_name + " " + (query.from.last_name == null ? "" : query.from.last_name), UTF_8);
 		String language = query.from.language_code;
-		context.answerCallbackQuery(query.id).url("%sregister?chat=%s&user=%s&username=%s&language=%s".formatted(url, chatId, userId, username, language)).exec();
+		context.answerCallbackQuery(query.id)
+		       .url("%sregister?chat=%s&user=%s&username=%s&language=%s".formatted(url, chatId, userId, username,
+		                                                                           language)).exec();
 	}
 	
 	private void onStartMessage(BotContext context, Message message) {

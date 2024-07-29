@@ -1,0 +1,178 @@
+:root {
+  --red-background: 255, 128, 128;
+  --black-background: 128, 128, 128;
+  --orange-background: 255, 128, 0;
+  --blue-background: 128, 128, 255;
+  --current-player-color: #90ff90;
+  --tile-color: 255, 247, 193;
+  --tile-red: rgb(255, 0, 0);
+  --tile-black: rgb(0, 0, 0);
+  --tile-orange: rgb(255, 128, 0);
+  --tile-blue: rgb(0, 0, 255);
+  --desk-background-color: 128, 128, 128;
+}
+body {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+  user-select: none;
+}
+table {
+  border-collapse: collapse;
+  margin-right: 2vh;
+  margin-left: 2vh;
+  display: inline-block;
+}
+td {
+  border: 1px solid #000;
+  width: 5vh;
+  height: 7vh;
+  text-align: center;
+  color: white;
+}
+
+.four-block-lines td:nth-child(1) {
+  background-color: rgb(var(--red-background));
+}
+.four-block-lines td:nth-child(2) {
+  background-color: rgb(var(--black-background));
+}
+.four-block-lines td:nth-child(3) {
+  background-color: rgb(var(--orange-background));
+}
+.four-block-lines td:nth-child(4) {
+  background-color: rgb(var(--blue-background));
+}
+.red-thirteen-block-line td {
+  background-color: rgb(var(--red-background));
+}
+.black-thirteen-block-line td {
+  background-color: rgb(var(--black-background));
+}
+.orange-thirteen-block-line td {
+  background-color: rgb(var(--orange-background));
+}
+.blue-thirteen-block-line td {
+  background-color: rgb(var(--blue-background));
+}
+
+.left-block .right-block {
+  margin: 1vh;
+}
+.right-block {
+  margin-left: 1vh;
+}
+
+.upper-block {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5vh;
+  margin-top: 2vh;
+}
+
+.lower-block {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+
+#players-table {
+  margin: 0 auto;
+  width: 30vh;
+}
+
+#players-table td {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  width: 30vh;
+  height: 6vh;
+  color: black;
+}
+
+.player-item img {
+  border-radius: 50%;
+  margin-right: 1vh;
+  max-height: 6vh;
+}
+
+.current-player {
+  background-color: var(--current-player-color);
+}
+
+#player-tiles-table td {
+  background-color: rgb(var(--desk-background-color));
+}
+
+#player-tiles-table td.dragover {
+  background-color: rgba(var(--desk-background-color), 0.5);
+}
+
+.tile {
+  background-color: rgb(var(--tile-color));
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: x-large;
+}
+
+.droppable {
+  position: relative;
+}
+
+.tile-red {
+  color: var(--tile-red);
+}
+.tile-black {
+  color: var(--tile-black);
+}
+.tile-orange {
+  color: var(--tile-orange);
+}
+.tile-blue {
+  color: var(--tile-blue);
+}
+
+.four-block-lines td:nth-child(1).dragover {
+  background-color: rgba(var(--red-background), 0.5);
+}
+.four-block-lines td:nth-child(2).dragover {
+  background-color: rgba(var(--black-background), 0.5);
+}
+.four-block-lines td:nth-child(3).dragover {
+  background-color: rgba(var(--orange-background), 0.5);
+}
+.four-block-lines td:nth-child(4).dragover {
+  background-color: rgba(var(--blue-background), 0.5);
+}
+.red-thirteen-block-line td.dragover {
+  background-color: rgba(var(--red-background), 0.5);
+}
+.black-thirteen-block-line td.dragover {
+  background-color: rgba(var(--black-background), 0.5);
+}
+.orange-thirteen-block-line td.dragover {
+  background-color: rgba(var(--orange-background), 0.5);
+}
+.blue-thirteen-block-line td.dragover {
+  background-color: rgba(var(--blue-background), 0.5);
+}
+.tile.dragover {
+  background-color: rgba(var(--tile-color), 0.5);
+}
+#button-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}
+#button-div button{
+  font-size: medium;
+}

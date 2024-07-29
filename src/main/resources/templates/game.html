@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="../static/css/game.css"
+            th:href="@{/css/game.css}"
+    />
+    <title th:text="#{game.header.text}"></title>
+    <script
+            src="../static/js/sockjs.min.js"
+            th:src="@{/js/sockjs.min.js}"
+    ></script>
+    <script
+            src="../static/js/stomp.min.js"
+            th:src="@{/js/stomp.min.js}"
+    ></script>
+    <script src="../static/js/game.js" th:src="@{/js/game.js}"></script>
+    <style></style>
+</head>
+<body>
+<div class="upper-block">
+    <table class="four-block-tables">
+        <tbody>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="four-block-tables">
+        <tbody>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="four-block-tables">
+        <tbody>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        <tr class="four-block-lines">
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+            <td class="droppable"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="thirteen-block-tables">
+        <tbody>
+        <tr class="red-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="red-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="black-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="black-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="orange-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="orange-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="blue-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        <tr class="blue-thirteen-block-line">
+            <td class="droppable">1</td>
+            <td class="droppable">2</td>
+            <td class="droppable">3</td>
+            <td class="droppable">4</td>
+            <td class="droppable">5</td>
+            <td class="droppable">6</td>
+            <td class="droppable">7</td>
+            <td class="droppable">8</td>
+            <td class="droppable">9</td>
+            <td class="droppable">10</td>
+            <td class="droppable">11</td>
+            <td class="droppable">12</td>
+            <td class="droppable">13</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="lower-block">
+    <div class="left-block">
+        <table id="players-table">
+            <tbody>
+            <tr>
+                <td class="player-item"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="right-block">
+        <table id="player-tiles-table">
+            <tbody>
+            <tr class="player-tiles-row">
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+            </tr>
+            <tr class="player-tiles-row">
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+                <td class="droppable"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="button-div">
+            <button onclick="endMove()" th:text="#{game.move.button}"></button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

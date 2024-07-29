@@ -1,5 +1,6 @@
 package com.mike.TelegramRummikub.Game.Matchmaking;
 
+import com.mike.TelegramRummikub.Game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ public class MatchmakingService {
 	private static final int MAX_USERS = 4;
 	@Autowired
 	private MatchmakingRepository repository;
+	@Autowired
+	private GameService gameService;
 	
 	/**
 	 * @param chatId   chatId from Telegram
@@ -26,8 +29,9 @@ public class MatchmakingService {
 		boolean isGlobal = !chatId.startsWith("-");
 		if (isGlobal) {
 			List<String> games = repository.findGameIdNotLikeOrderByGameId("-%");
-			if (games.size() == 0) gameId = "1";
-			else {
+			if (games.isEmpty()) {
+				gameId = "1";
+			} else {
 				for (String game : games) {
 					if (repository.countByGameId(game) < MAX_USERS) {
 						gameId = game;
@@ -67,7 +71,16 @@ public class MatchmakingService {
 	}
 	
 	public void removeUser(MatchmakingUser matchmakingUser) {
-		matchmakingUser.deleteImg();
+		matchmakingUser.deleteImage();
 		repository.delete(matchmakingUser);
+	}
+	
+	public void createGame(String gameId) {
+		//create new game
+		List<MatchmakingUser> users = repository.findMatchmakingUserByGameId(gameId);
+		gameService.createGame(gameId, users);
+		
+		//delete from matchmaking
+		repository.deleteAll(users);
 	}
 }
