@@ -4,6 +4,7 @@ let gameId = params.get("gameId");
 let userId = params.get("userId");
 let dragged = null;
 let currentPlayer;
+let update_;
 
 function connect() {
   let socket = new SockJS("/ws");
@@ -21,7 +22,10 @@ function connect() {
           saveBoard();
         } else if (update.body == "gameEnd") {
           endGame();
-        } else updateGame(JSON.parse(update.body));
+        } else {
+          update_ = JSON.parse(update.body);
+          updateGame(update_);
+        }
       }
     );
   });
@@ -464,6 +468,10 @@ function getTileFromChild(child) {
       break;
   }
   return { color: childColor, number: childNumber };
+}
+
+function reset() {
+  updateGame(update_);
 }
 
 function endGame() {

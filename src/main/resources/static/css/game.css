@@ -176,3 +176,6 @@ td {
 #button-div button{
   font-size: medium;
 }
+#button-div button:nth-child(1){
+  margin-right: 2vh;
+}
