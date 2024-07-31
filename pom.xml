@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.mike</groupId>
     <artifactId>TelegramRummikub</artifactId>
-    <version>0.8.0-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
     <name>TelegramRummikub</name>
     <description>Rummikub game for Telegram</description>
     <url/>

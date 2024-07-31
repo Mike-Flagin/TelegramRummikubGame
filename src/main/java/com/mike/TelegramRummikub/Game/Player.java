@@ -8,21 +8,23 @@ public class Player extends CommonPlayer {
 	private boolean isFirstMoveMade;
 	private boolean isConnected;
 	
-	public Player(String userId, List<List<Tile>> tiles, boolean isFirstMoveMade, boolean isConnected) {
+	public Player(String userId, List<List<Tile>> tiles, boolean isFirstMoveMade, boolean isConnected, String image) {
 		this.isFirstMoveMade = isFirstMoveMade;
 		this.isConnected = isConnected;
 		this.userId = userId;
 		this.tiles = tiles;
+		this.image = image;
 	}
 	
 	public Player() {
 	}
 	
-	public Player(String userId, String username) {
+	public Player(String userId, String username, String image) {
 		this.isFirstMoveMade = false;
 		this.userId = userId;
 		this.username = username;
 		isConnected = true;
+		this.image = image;
 	}
 	
 	public String getUserId() {

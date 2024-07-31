@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("../img/register_bg.png");
+    background-size:cover;
+    color:white
+}
+.container {
+    text-align: center;
+}
+.error-text {
+    font-size: 24px;
+    margin-bottom: 20px;
+}

@@ -16,7 +16,7 @@ public class GameService {
 	
 	public void createGame(String gameId, List<MatchmakingUser> users) {
 		List<Player> players = new ArrayList<>();
-		users.forEach((user) -> players.add(new Player(user.getUserId(), user.getUsername())));
+		users.forEach((user) -> players.add(new Player(user.getUserId(), user.getUsername(), user.getImage())));
 		Game game = new Game(gameId, players);
 		game.startGame();
 		repository.save(game);

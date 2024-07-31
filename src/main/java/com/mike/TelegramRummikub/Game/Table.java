@@ -114,6 +114,7 @@ public class Table {
 					rowTilesCounter++;
 				}
 			}
+			if (rowTilesCounter > 0 && rowTilesCounter < 3) return false;
 		}
 		return true;
 	}
