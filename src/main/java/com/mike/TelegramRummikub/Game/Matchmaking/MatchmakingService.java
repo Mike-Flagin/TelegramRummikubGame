@@ -1,5 +1,6 @@
 package com.mike.TelegramRummikub.Game.Matchmaking;
 
+import com.mike.TelegramRummikub.Game.Game;
 import com.mike.TelegramRummikub.Game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +83,12 @@ public class MatchmakingService {
 		
 		//delete from matchmaking
 		repository.deleteAll(users);
+	}
+	
+	//TODO: if matchmaking algorithm changes remake it
+	public boolean isUserAlreadyInGame(String chatId, String userId) {
+		Game g = gameService.getGameById(chatId);
+		if (g == null) return false;
+		return g.getPlayers().stream().anyMatch((user) -> user.getUserId().equals(userId));
 	}
 }

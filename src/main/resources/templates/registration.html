@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/register.css" th:href="@{/css/register.css}"/>
+    <link rel="stylesheet" href="../static/css/registration.css" th:href="@{/css/registration.css}"/>
     <title th:text="#{registration.header.text}"></title>
     <script src="../static/js/sockjs.min.js" th:src="@{/js/sockjs.min.js}"></script>
     <script src="../static/js/stomp.min.js" th:src="@{/js/stomp.min.js}"></script>
-    <script src="../static/js/register.js" th:src="@{/js/register.js}"></script>
+    <script src="../static/js/registration.js" th:src="@{/js/registration.js}" th:inline="javascript"></script>
 </head>
 <body>
 <div class="container">
@@ -24,7 +24,7 @@
     </table>
     <div class="buttons">
         <button onclick="leave()" th:text="#{registration.leave.button}"></button>
-        <button th:if="${mainUser}" onclick="start()" th:text="#{registration.start.button}"></button>
+        <button onclick="start()" th:text="#{registration.start.button}"></button>
     </div>
 </div>
 </body>

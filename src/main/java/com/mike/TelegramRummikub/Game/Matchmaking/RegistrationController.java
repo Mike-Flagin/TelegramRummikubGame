@@ -3,6 +3,8 @@ package com.mike.TelegramRummikub.Game.Matchmaking;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,6 +44,8 @@ public class RegistrationController {
 	public String registerUser(HttpServletRequest request, HttpServletResponse response,
 	                           @RequestParam("chat") String chat, @RequestParam("user") String user,
 	                           @RequestParam("username") String username, @RequestParam("language") String language) {
+		boolean isAlreadyPlaying = matchmakingService.isUserAlreadyInGame(chat, user);
+		if (isAlreadyPlaying) return "redirect:/game?gameId=%s&userId=%s".formatted(chat, user);
 		MatchmakingUser newUser = matchmakingService.addUser(chat, user, username);
 		if (newUser != null) {
 			messagingTemplate.convertAndSend("/registration/updates/%s".formatted(newUser.getGameId()),
@@ -81,7 +86,14 @@ public class RegistrationController {
 	@GetMapping(value = "/images/{*imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> getImage(@PathVariable String imageId) {
 		try {
-			byte[] image = Files.readAllBytes(Path.of(imageId));
+			byte[] image;
+			if (imageId.contains("common")) {
+				Resource resource = new ClassPathResource("static/img" + imageId);
+				Path path = Paths.get(resource.getURI());
+				image = Files.readAllBytes(path);
+			} else {
+				image = Files.readAllBytes(Path.of(imageId));
+			}
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.IMAGE_JPEG);
 			return new ResponseEntity<>(image, headers, HttpStatus.OK);
@@ -96,5 +108,4 @@ public class RegistrationController {
 	 */
 	public record User(boolean add, MatchmakingUser user) {}
 }
-//TODO: image for users without image, fix when mainUser leaves button must be added to another user,
-// leave when page is closed
+//TODO: leave when page is closed

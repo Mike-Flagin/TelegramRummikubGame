@@ -25,6 +25,9 @@ public class GameService {
 	
 	public GameData getGameForUser(String gameId, String userId) {
 		Game game = repository.findById(gameId).orElseThrow();
+		game.getPlayers().stream().filter((user) -> user.getUserId().equals(userId)).findFirst().orElseThrow()
+		    .setConnected(true);
+		repository.save(game);
 		List<PlayerData> players = new ArrayList<>();
 		game.getPlayers().forEach(
 				player -> players.add(new PlayerData(player.getUserId(), player.getUsername(), player.getImage())));
@@ -51,11 +54,20 @@ public class GameService {
 	}
 	
 	public Game getGameById(String gameId) {
-		return repository.findById(gameId).orElseThrow();
+		return repository.findById(gameId).orElse(null);
 	}
 	
 	public List<ScoreUser> getUserScoresByGameId(String gameId) {
 		Game game = repository.findById(gameId).orElseThrow();
 		return game.calculateScore();
+	}
+	
+	public void userLeave(User user) {
+		Game game = repository.findById(user.gameId()).orElse(null);
+		if (game == null) return;
+		game.getPlayers().stream().filter((player -> player.getUserId().equals(user.userId()))).findFirst()
+		    .orElseThrow().setConnected(false);
+		repository.save(game);
+		if (game.getPlayers().stream().noneMatch((Player::isConnected))) repository.delete(game);
 	}
 }

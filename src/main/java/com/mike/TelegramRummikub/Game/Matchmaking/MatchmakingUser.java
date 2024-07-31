@@ -14,11 +14,12 @@ public class MatchmakingUser extends CommonPlayer {
 	@Indexed(name = "ttl_index", expireAfterSeconds = 14400)//4 hours
 	private Date createdAt;
 	
-	public MatchmakingUser(String gameId, String userId, String username, Date createdAt) {
+	public MatchmakingUser(String gameId, String userId, String username, Date createdAt, String image) {
 		this.gameId = gameId;
 		this.createdAt = createdAt;
 		this.userId = userId;
 		this.username = username;
+		this.image = image;
 	}
 	
 	public MatchmakingUser() {
@@ -29,6 +30,7 @@ public class MatchmakingUser extends CommonPlayer {
 		this.userId = userId;
 		this.username = username;
 		createdAt = new Date();
+		getImage();
 	}
 	
 	public String getGameId() {

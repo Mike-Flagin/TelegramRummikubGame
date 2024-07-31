@@ -1,12 +1,19 @@
 package com.mike.TelegramRummikub.Game;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -38,6 +45,7 @@ public class GameController {
 		//if move made update all
 		if (success) {
 			Game g = gameService.getGameById(update.user.gameId);
+			if (g == null) return;
 			List<String> playerIds = new ArrayList<>();
 			g.getPlayers().forEach((player) -> playerIds.add(player.getUserId()));
 			if (g.isWin()) {
@@ -74,6 +82,19 @@ public class GameController {
 		List<ScoreUser> users = gameService.getUserScoresByGameId(gameId);
 		model.addAttribute("users", users);
 		return "win";
+	}
+	
+	@PostMapping(value = "/game/leave", consumes = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<Void> gameLeave(@RequestBody String userText) {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = null;
+		try {
+			user = mapper.readValue(userText, User.class);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+		gameService.userLeave(user);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	public record User(String userId, String gameId) {}

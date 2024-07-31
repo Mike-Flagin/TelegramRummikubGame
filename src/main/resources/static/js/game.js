@@ -5,6 +5,7 @@ let userId = params.get("userId");
 let dragged = null;
 let currentPlayer;
 let update_;
+let end = false;
 
 function connect() {
   let socket = new SockJS("/ws");
@@ -475,6 +476,7 @@ function reset() {
 }
 
 function endGame() {
+  end = true;
   let url = window.location.origin + "/win?gameId=" + gameId;
   window.location.replace(url);
 }
@@ -483,6 +485,18 @@ function clickDrop(event) {
   event.target.classList.add("dragover");
   dragDrop(event);
 }
+
+window.onbeforeunload = (event) => {
+  if (!end) event.preventDefault();
+};
+
+window.onunload = () => {
+  if (!end)
+    navigator.sendBeacon(
+      "/game/leave",
+      JSON.stringify({ userId: userId, gameId: gameId })
+    );
+};
 
 window.onload = function () {
   connect();
@@ -496,7 +510,3 @@ window.onload = function () {
     elements[i].addEventListener("click", clickDrop);
   }
 };
-
-//{"players":[{"id":"406680458","username":"Михаил Антипов","image":"/tmp/406680458.jpg"},{"id":"149162712","username":"Миша ","image":""}],"currentPlayer":"406680458","table":null,"tiles":[[{"color":"ORANGE","number":"TWELVE"},{"color":"BLUE","number":"TEN"},{"color":"RED","number":"ELEVEN"},{"color":"RED","number":"THIRTEEN"},{"color":"RED","number":"NINE"},{"color":"BLUE","number":"TWELVE"},{"color":"BLACK","number":"TWELVE"},{"color":"ORANGE","number":"SIX"},{"color":"ORANGE","number":"ONE"},{"color":"RED","number":"THREE"},{"color":"RED","number":"FOUR"},{"color":"ORANGE","number":"NINE"},{"color":"BLUE","number":"TWELVE"},{"color":"BLUE","number":"TEN"}]]}
-
-//TODO: перемещать: клик на тайл + клик куда поместить
