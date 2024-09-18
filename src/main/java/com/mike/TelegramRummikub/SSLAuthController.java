@@ -22,7 +22,7 @@ public class SSLAuthController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
 		headers.add(HttpHeaders.CONTENT_TYPE, "text/plain");
-		
+
 		// Return file content as response
 		return new ResponseEntity<>(resource, headers, HttpStatus.OK);
 	}
