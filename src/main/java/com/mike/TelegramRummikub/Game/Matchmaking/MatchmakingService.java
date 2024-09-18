@@ -27,7 +27,7 @@ public class MatchmakingService {
 		String gameId = null;
 		MatchmakingUser user = repository.findFirstMatchmakingUserByUserId(userId);
 		if (user != null) return null;
-		boolean isGlobal = !chatId.startsWith("-");
+		/*boolean isGlobal = !chatId.startsWith("-");
 		if (isGlobal) {
 			List<String> games = repository.findGameIdNotLikeOrderByGameId("-%");
 			if (games.isEmpty()) {
@@ -58,7 +58,8 @@ public class MatchmakingService {
 				gameId = chatId + i;
 			}
 		}
-		MatchmakingUser newUser = new MatchmakingUser(gameId, userId, username);
+		 */
+		MatchmakingUser newUser = new MatchmakingUser(chatId, userId, username);
 		repository.save(newUser);
 		return newUser;
 	}

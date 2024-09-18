@@ -63,10 +63,9 @@ public class GameController {
 					}
 				});
 			}
-		} else { // update only current user
-			GameData data = gameService.getGameForUser(update.user.gameId, update.user.userId);
+		} else { // send error to user
 			messagingTemplate.convertAndSend("/game/updates/%s/%s".formatted(update.user.gameId, update.user.userId),
-			                                 data);
+			                                 "wrongMove");
 		}
 	}
 	

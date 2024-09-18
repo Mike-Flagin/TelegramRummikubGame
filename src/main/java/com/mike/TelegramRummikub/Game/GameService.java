@@ -59,7 +59,9 @@ public class GameService {
 	
 	public List<ScoreUser> getUserScoresByGameId(String gameId) {
 		Game game = repository.findById(gameId).orElseThrow();
-		return game.calculateScore();
+		List<ScoreUser> res = game.calculateScore();
+		repository.delete(game);
+		return res;
 	}
 	
 	public void userLeave(User user) {

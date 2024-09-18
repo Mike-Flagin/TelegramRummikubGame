@@ -23,6 +23,8 @@ function connect() {
           saveBoard();
         } else if (update.body == "gameEnd") {
           endGame();
+        } else if (update.body == "wrongMove") {
+          alert("Wrong Turn");
         } else {
           update_ = JSON.parse(update.body);
           updateGame(update_);
